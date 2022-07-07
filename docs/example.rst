@@ -19,8 +19,8 @@ whose solution is the evolution of the pendulum dynamics is
     \begin{aligned}
         \dot{q} &= p \\
         \dot{p} &= -\sin(q) \\
-        q(0) &= 1 \\
-        p(0) &= 0
+                    q(0) &= 1 \\
+                    p(0) &= 0
         \,.
     \end{aligned}
 
@@ -44,9 +44,9 @@ see :ref:`plotting`.
 
 .. doctest::
 
-    >>> import simulateString
-    >>> import plotResults
-    >>> from geometricallyExactString import GES
+    >>> import GeometricallyExactString.simulateString
+    >>> import GeometricallyExactString.plotResults
+    >>> from GeometricallyExactString.geometricallyExactString import GES
     >>> import jax.numpy as jnp
 
     >>> T = 1.     # simulation time

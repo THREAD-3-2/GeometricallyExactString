@@ -28,4 +28,5 @@ install the package in a virtual environment like so:
 For development, the packages listed in `requirements.txt` need to be installed:
 
 .. code-block:: bash
+    
     pip install -r requirements.txt
