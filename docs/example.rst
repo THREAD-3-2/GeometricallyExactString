@@ -44,9 +44,9 @@ see :ref:`plotting`.
 
 .. doctest::
 
-    >>> from GeometricallyExactString import simulateString
+    >>> import simulateString
     >>> import plotResults
-    >>> from geometricallyExactStringGES import GES
+    >>> from geometricallyExactStrin.GES import GES
     >>> import jax.numpy as jnp
 
     >>> T = 1.     # simulation time
