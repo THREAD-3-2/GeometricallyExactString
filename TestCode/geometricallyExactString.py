@@ -1,19 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jun 29 14:00:21 2022
-
-@author: MSchubert
+Geometrically exact string.
 """
 
 import jax.numpy as jnp
 from jax import jit, jacrev, jacfwd, vmap
 
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
-
-from scipy import optimize
-from tqdm import tqdm
 from typing import NamedTuple
 
 # configurate JAX
@@ -24,14 +17,8 @@ jax.config.update('jax_disable_jit', False)
 jax.config.update('jax_enable_x64', True)
 
 
-@jit
-def intiialConditionsString(s):
-    # define the initial configuration q_0 and velocity v_0 of the string
-    # string is fixed at s=0, thus v_0(s=0) = 0
-    return jnp.array([0., 0., -1.5*s]), jnp.array([0., 0.1*s, 0.])
-
-
 class GES(NamedTuple):
+
     # Geometrically exact string
     # space
     nsteps: int             # number of segments in space
@@ -66,7 +53,7 @@ class GES(NamedTuple):
         A : jnp.ndarray
             area of the crosssection of the string.
         initialConditions : function
-            function defining the relative position of the nodes in space.
+            function defining the relative position of one node in space.
 
         Returns
         -------
@@ -552,73 +539,3 @@ class GES(NamedTuple):
         """
         return jacfwd(GES.assembleSystem,
                       0)(q_kp1, q_k, v_0, string, time_step, g_)
-
-
-if __name__ == "__main__":
-
-    # create string
-    string = GES.initString(L=10, nsteps=25, rho=4.5e0, E=1e2, A=0.1,
-                            initialConditions=intiialConditionsString)
-
-    # simulation parameters
-    T = 100.    # simulation time
-    nt = 5000  # number of time steps
-    dt = T/nt  # time step width
-    g_ = 9.81  # graviational constant
-
-    # create solution vector
-    x = jnp.zeros((3*(string.nsteps+1), nt))
-    # set initial position
-    x = x.at[:, 0].set(string.q_0.flatten())
-
-    # first time step
-    sol_dyn = optimize.root(GES.assembleSystem1,
-                            x[:, 0],
-                            args=(x[:, 0], string.v_0, string, dt, g_),
-                            method='hybr',
-                            jac=GES.jacobianAssembleSystem1,
-                            options={'xtol': 1e-12})
-    x = x.at[:, 1].set(sol_dyn.x)
-
-    # solve all other time steps
-    for n_t in tqdm(range(1, nt+1)):
-        sol_dyn = optimize.root(GES.assembleSystem,
-                                x[:, n_t],
-                                args=(x[:, n_t], x[:, n_t-1], string, dt, g_),
-                                method='hybr',
-                                jac=GES.jacobianAssembleSystem,
-                                options={'xtol': 1e-12})
-        x = x.at[:, n_t+1].set(sol_dyn.x)
-
-    # time vector
-    t = jnp.linspace(0, T, nt)
-    plt.plot(t, x[len(x)-1, :])
-
-    x_an = jnp.reshape(x, (string.nsteps+1, 3, nt))
-    # create animation
-    fig = plt.figure()
-    ax = plt.axes(xlim=(1.1 * jnp.amin(x_an[:, 1, :]),
-                        1.1 * jnp.amax(x_an[:, 1, :])),
-                  ylim=(1.1 * jnp.amin(x_an[:, 2, :]),
-                        1.1 * jnp.amax(x_an[:, 2, :])))
-    ax.set_aspect('equal')
-    line, = ax.plot([], [], lw=3)
-    plt.grid(color='0.9')
-
-    def init():
-        line.set_data([], [])
-        return line,
-
-    def animate(i):
-        x_ani = x_an[:, 1, 25 * i]
-        y_ani = x_an[:, 2, 25 * i]
-        line.set_data(x_ani, y_ani)
-        return line,
-
-    anim = animation.FuncAnimation(fig, animate,
-                                   init_func=init,
-                                   frames=nt//25,
-                                   interval=(nt/25)/T,
-                                   blit=False)
-
-    anim.save('string.gif', writer='imagemagick')
