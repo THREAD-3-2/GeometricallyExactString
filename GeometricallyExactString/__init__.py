@@ -1,3 +1,3 @@
-from .simulateString import *
-from .plotResults import *
-from .geometricallyExactStringGES import *
+import simulateString
+import plotResults
+import geometricallyExactStringGES
