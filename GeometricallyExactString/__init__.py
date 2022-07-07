@@ -1,3 +1,3 @@
-import simulateString
+import GeometricallyExactString.simulateString
 import plotResults
 import geometricallyExactStringGES
