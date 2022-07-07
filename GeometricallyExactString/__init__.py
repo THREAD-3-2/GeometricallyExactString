@@ -1,3 +1,0 @@
-import GeometricallyExactString.simulateString
-import plotResults
-import geometricallyExactStringGES
