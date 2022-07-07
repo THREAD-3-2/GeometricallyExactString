@@ -4,8 +4,7 @@
  Example
 =========
 
-This example shows how to simulate the evolution of a simple pendulum
-with the symplectic Euler method.
+This example shows how to simulate a geometrically exact string with fixed-free boundary conditions.
 
 
 Problem description
@@ -45,31 +44,24 @@ see :ref:`plotting`.
 
 .. doctest::
 
-    >>> import autograd.numpy as np
-    >>> from example_gni_project import *
+    >>> import simulateString
+    >>> import plotResults
+    >>> from geometricallyExactString import GES
+    >>> import jax.numpy as jnp
 
-    >>> def pendulum_vector_field(x):
-    ...     q, p = x
-    ...     return np.array([p, -np.sin(q)])
+    >>> T = 1.     # simulation time
+    >>> nt = 500   # number of time steps
+    >>> dt = T/nt  # time step width
+    >>> g_ = 9.81  # graviational constant
 
-    >>> pendulum_ivp = IVP(
-    ...     ("q", "p"),
-    ...     pendulum_vector_field,
-    ...     np.array([1., 0.])
-    ... )
+    >>> def initialConditionsString(s):
+    ...     return jnp.array([0., 0., -1.5*s]), jnp.array([0., 0.1*s, 0.])
+    
+    >>> string = GES.initString(L=10, nsteps=25, rho=4.5e0, E=1e2, A=0.1,
+    ...                         initialConditions=initialConditionsString)
 
-    >>> def pendulum_energy(x):
-    ...     q, p = x
-    ...     return 1/2 * p**2 + (1 - np.cos(q))
+    >>> x = simulateString.simulate(string, nt, dt, g_)
 
-    >>> simulation = simulate(
-    ...     pendulum_ivp,
-    ...     symplectic_euler,
-    ...     0.25,
-    ...     duration=55.0
-    ... )
-
-    >>> plot_trajectory(simulation)
-    >>> plot_phase_portrait(simulation)
-    >>> plot_observable(simulation, "energy", pendulum_energy)
+    >>> plotResults.plotTipTrajectroy(x, T, nt)
+    >>> plotResults.createAnimation(x, string, T, nt)
 

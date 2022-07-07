@@ -6,10 +6,15 @@
 Welcome to Geometrically exact string's documentation!
 ======================================================
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+Contents
+========
 
+.. toctree::
+   installation
+   example
+   plotting
+   convergence
+   :maxdepth: 2
 
 
 Indices and tables
