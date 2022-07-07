@@ -10,37 +10,17 @@ This example shows how to simulate a geometrically exact string with fixed-free 
 Problem description
 ===================
 
-The state space is :math:`\mathbb{R}^2`
-and the initial value problem
-whose solution is the evolution of the pendulum dynamics is
-
-.. math::
-
-    \begin{aligned}
-        \dot{q} &= p \\
-        \dot{p} &= -\sin(q) \\
-                    q(0) &= 1 \\
-                    p(0) &= 0
-        \,.
-    \end{aligned}
-
-
-.. note::
-
-    The right hand side of the first two equations define a vector field on :math:`\mathbb{R}^2`
-    and the last two equations define a point on :math:`\mathbb{R}^2`.
+The string is fixed at one end and 
 
 
 Simulation
 ==========
 
-First, the vector field is defined as a Python function,
-which in turn is used to define the :ref:`initial value problem (IVP) <ivp>`,
-Then, the energy function (Hamiltonian) of the pendulum is defined as a Python function.
-The IVP is :ref:`solved <simulate>` with the symplectic Euler method
-using a time step of 0.25 seconds for a duration of 55 seconds,
-Finally, the trajectory, the phase portrait and the evolution of the energy are plotted,
-see :ref:`plotting`.
+First, the initial conditions are defined as a Python function. The relative position :math:`s\in\[0, L\]`
+defines the node location along the string. Here, the string is initially stretched by :math:`50\%` and has a linearly increasing velocity.
+Then, a string is initialized, with the desired length :math:`L`, number of discretization steps :math:`n_s`,
+mass density :math:`\rho` and material parameter :math:`E` as well as the area of the cross-section :math:`A`.
+The dynamic simulation is then started and the results plotted.
 
 .. doctest::
 

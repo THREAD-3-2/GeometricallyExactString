@@ -5,7 +5,7 @@ Simulate the string
 """
 
 import jax.numpy as jnp
-from geometricallyExactString import GES
+from geometricallyExactStringGES import GES
 
 from scipy import optimize
 from tqdm import tqdm
