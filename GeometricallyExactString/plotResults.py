@@ -16,6 +16,7 @@ jax.config.update("jax_debug_nans", False)
 jax.config.update('jax_disable_jit', False)
 jax.config.update('jax_enable_x64', True)
 
+__all__ = ['plotTipTrajectory', 'createAnimation']
 
 def plotTipTrajectroy(x, T, nt):
     """Plot the x-position of the tip of the string.

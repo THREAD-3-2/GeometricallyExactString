@@ -17,6 +17,7 @@ jax.config.update("jax_debug_nans", False)
 jax.config.update('jax_disable_jit', False)
 jax.config.update('jax_enable_x64', True)
 
+__all__ = ['simulate']
 
 def simulate(string, nt, dt, g_):
     """Simulate the string.
