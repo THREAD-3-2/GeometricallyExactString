@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Integration methods &#8212; geometrically_exact_string 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="integration-methods">
+<span id="integrators"></span><h1>Integration methods<a class="headerlink" href="#integration-methods" title="Permalink to this heading">¶</a></h1>
+<section id="generic-time-stepping-routine">
+<span id="simulate"></span><h2>Generic time-stepping routine<a class="headerlink" href="#generic-time-stepping-routine" title="Permalink to this heading">¶</a></h2>
+<p>All integration methods are used via the same time-stepping routine:</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="GeometricallyExactString.simulateString">
+<span class="sig-prename descclassname"><span class="pre">GeometricallyExactString.</span></span><span class="sig-name descname"><span class="pre">simulateString</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#GeometricallyExactString.simulateString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simulate the string</p>
+</dd></dl>
+
+<section id="non-symplectic-methods">
+<span id="nonsymplectic"></span><h3>Non-symplectic methods<a class="headerlink" href="#non-symplectic-methods" title="Permalink to this heading">¶</a></h3>
+<p>Below
+<span class="math notranslate nohighlight">\(X \colon \mathcal{X} \rightarrow T \mathcal{X}\)</span> denotes the vector field
+and <span class="math notranslate nohighlight">\(x_0 \in \mathcal{X}\)</span> denotes the initial state.
+Together they define the initial value problem.
+Further, <span class="math notranslate nohighlight">\(x_1 \in \mathcal{X}\)</span> denotes the state of the system
+after one time step of size <span class="math notranslate nohighlight">\(h\)</span>.</p>
+</section>
+</section>
+<section id="explicit-euler">
+<h2><cite>explicit_euler</cite><a class="headerlink" href="#explicit-euler" title="Permalink to this heading">¶</a></h2>
+<p>The explicit Euler method is the simplest approximation one can make:</p>
+<div class="math notranslate nohighlight">
+\[x_1 = x_0 + h \, X(x_0)\]</div>
+<p>The method is first-order
+and unstable in the sense that
+the integrator will predict a gain of energy due to numerical errors.</p>
+</section>
+<section id="implicit-euler">
+<h2><cite>implicit_euler</cite><a class="headerlink" href="#implicit-euler" title="Permalink to this heading">¶</a></h2>
+<p>The implicit Euler method is already significantly more complicated in its implementation
+since it requires solving a system of possibly nonlinear equations:</p>
+<div class="math notranslate nohighlight">
+\[x_1 = x_0 + h \, X(x_1)\]</div>
+<p>The method is first-order
+and stable in the sense that
+the integrator will predict a loss of energy due to numerical errors.</p>
+<section id="symplectic-methods">
+<span id="symplectic"></span><h3>Symplectic methods<a class="headerlink" href="#symplectic-methods" title="Permalink to this heading">¶</a></h3>
+<p>Symplectic methods have good long-time energy behavior.
+They (almost) conserve the energy (Hamiltonian) of a <a class="reference internal" href="geometricallyexactstring.html#hamiltonian-ivp"><span class="std std-ref">Hamiltonian system</span></a>.
+More precisely, symplectic methods do not conserve the physical energy
+but they conserve a nearby/perturbed Hamiltonian,
+see e.g. <a class="reference external" href="https://doi.org/10.1137/S0036142997329797">Reich 1999</a> and references therein.</p>
+<p>Since symplectic methods mimic a (canonical) Hamiltonian structure at the discrete level,
+the state is partitioned into
+configuration variables <span class="math notranslate nohighlight">\(q\)</span> and conjugate momentum variables <span class="math notranslate nohighlight">\(p\)</span>,
+i.e. <span class="math notranslate nohighlight">\(x = \left[ q, \, p \right]\)</span>.</p>
+</section>
+</section>
+<section id="symplectic-euler">
+<h2><cite>symplectic_euler</cite><a class="headerlink" href="#symplectic-euler" title="Permalink to this heading">¶</a></h2>
+<p>The symplectic Euler method essentially combines
+the explicit Euler method and the implicit Euler method:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{bmatrix}
+    q_1 \\
+    p_1
+\end{bmatrix}
+=
+\begin{bmatrix}
+    q_0 \\
+    p_0
+\end{bmatrix}
++ h \,
+X \biggl(
+\begin{bmatrix}
+    q_0 \\
+    p_1
+\end{bmatrix}
+\biggr)\end{split}\]</div>
+</section>
+<section id="symplectic-euler2">
+<h2><cite>symplectic_euler2</cite><a class="headerlink" href="#symplectic-euler2" title="Permalink to this heading">¶</a></h2>
+<p>Another symplectic Euler method results when combining
+the implicit Euler method and the explicit Euler method
+in the other obvious way:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{bmatrix}
+    q_1 \\
+    p_1
+\end{bmatrix}
+=
+\begin{bmatrix}
+    q_0 \\
+    p_0
+\end{bmatrix}
++ h \,
+X \biggl(
+\begin{bmatrix}
+    q_1 \\
+    p_0
+\end{bmatrix}
+\biggr)\end{split}\]</div>
+</section>
+<section id="stormer-verlet">
+<h2><cite>störmer_verlet</cite><a class="headerlink" href="#stormer-verlet" title="Permalink to this heading">¶</a></h2>
+<p>The Störmer-Verlet method results from the composition of
+the first and the second symplectic Euler method,
+which is asserted by the <cite>test_composition_störmer_verlet</cite> function
+in <cite>tests/test_integrators.py</cite>.
+To concretely describe the Störmer-Verlet method,
+the vector field is partitioned analogously to the state
+i.e.
+<span class="math notranslate nohighlight">\(x = \left[ q, \, p \right]\)</span> and
+<span class="math notranslate nohighlight">\(X = \left[ X_q, \, X_p \right] = \left[ +\frac{\partial H(q, p)}{\partial p}, -\frac{\partial H(q, p)}{\partial q} \right]\)</span>.
+As long as <span class="math notranslate nohighlight">\(H\)</span> is separable,
+<span class="math notranslate nohighlight">\(X_q\)</span> only depends on <span class="math notranslate nohighlight">\(p\)</span>
+while
+<span class="math notranslate nohighlight">\(X_p\)</span> only depends on <span class="math notranslate nohighlight">\(q\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+     p_{1/2} &amp;= p_0 + \frac{h}{2} \, X_p(q_0) \\
+     q_1 &amp;= q_0 + h \, p_{1/2} \\
+     p_1 &amp;= p_{1/2} + \frac{h}{2} \, X_p(q_1)
+ \end{align}\end{split}\]</div>
+<p>The Störmer-Verlet method is the composition of the two symplectic Euler methods.
+As such, it is a symmetric second-order method.
+The symmetry is asserted by <cite>test_symmetry_störmer_verlet</cite> in <cite>test/test_integrators.py</cite>.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">geometrically_exact_string</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="convergence.html">Convergence analysis</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Matthias Schubert.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/integrators.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
