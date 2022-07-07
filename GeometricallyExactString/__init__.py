@@ -1,1 +1,3 @@
-from GeometricallyExactString import simulateString
+from .simulateString import *
+from .plotResults import *
+from .geometricallyExactStringGES import *
