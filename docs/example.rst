@@ -44,7 +44,7 @@ see :ref:`plotting`.
 
 .. doctest::
 
-    >>> from simulateString import simulate
+    >>> import simulateString
     >>> from plotResults import plotTipTrajectroy, createAnimation
     >>> from geometricallyExactString import GES
     >>> import jax.numpy as jnp
