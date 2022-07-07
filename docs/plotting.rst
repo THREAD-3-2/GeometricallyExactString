@@ -9,7 +9,7 @@ These functions are for visualizing simulation results.
 Trajectory
 ----------
 
-.. autofunction:: GeometricallyExactString.plotTipTrajectroy
+.. autofunction:: GeometricallyExactString.plotTipTrajectory
 
 
 Phase portrait

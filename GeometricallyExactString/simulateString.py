@@ -1,11 +1,8 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 Simulate the string
 """
 
 import jax.numpy as jnp
-from geometricallyExactStringGES import GES
 
 from scipy import optimize
 from tqdm import tqdm
@@ -17,7 +14,10 @@ jax.config.update("jax_debug_nans", False)
 jax.config.update('jax_disable_jit', False)
 jax.config.update('jax_enable_x64', True)
 
+from .geometricallyExactStringGES import GES
+
 __all__ = ['simulate']
+
 
 def simulate(string, nt, dt, g_):
     """Simulate the string.

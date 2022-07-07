@@ -38,8 +38,8 @@ The dynamic simulation is then started and the results plotted.
     >>> string = GES.initString(L=10, nsteps=25, rho=4.5e0, E=1e2, A=0.1,
     ...                         initialConditions=initialConditionsString)
 
-    >>> x = simulateString.simulate(string, nt, dt, g_)
+    >>> x = simulate(string, nt, dt, g_)
 
-    >>> plotResults.plotTipTrajectroy(x, T, nt)
-    >>> plotResults.createAnimation(x, string, T, nt)
+    >>> plotTipTrajectory(x, T, nt)
+    >>> createAnimation(x, string, T, nt)
 

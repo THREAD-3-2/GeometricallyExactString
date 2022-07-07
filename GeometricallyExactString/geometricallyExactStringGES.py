@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 Geometrically exact string.
 """
@@ -17,6 +15,7 @@ jax.config.update('jax_disable_jit', False)
 jax.config.update('jax_enable_x64', True)
 
 __all__ = ['GES']
+
 
 class GES(NamedTuple):
 
@@ -37,6 +36,7 @@ class GES(NamedTuple):
     # initial conditions
     q_0: jnp.ndarray        # initial configuration of the string
     v_0: jnp.array          # initial continuous velocity of the string
+
 
     def initString(L, nsteps, rho, E, A, initialConditions):
         """Create a gemetrically exact string.
