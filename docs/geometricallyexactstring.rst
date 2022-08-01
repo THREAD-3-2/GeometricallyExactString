@@ -1,28 +1,81 @@
-.. _geometricallyexactstring:
+.. _ivp:
 
 ========================
-Geometrically exact string model
+ Initial value problems
 ========================
 
-Continuous model
+.. _general_ivp:
+
+
+General initial value problems
 ------------------------------
 
-We consider the arc length of a stress-free reference configuration :math:`s \in [0, L] \subseteq \mathbb{R}` and time :math:`t \in [0, T] \subseteq \mathbb{R}`.
-The deformation of the string is then described by :math:`r(s, t): [0, L] \times [0, T] \mapsto \mathbb{R}^3`. Its velocity is :math:`v(s,t) = \frac{\partial r(s, t)}{\partial t}`.
-The stretch is defined as :math:`\nu(s,t) = \left\Vert \frac{\partial r(s,t)}{\partial s} \right\Vert`.
+The considered initial value problems are stated as
+a system of first-order ordinary differential equations
+defined via a function :math:`f`
+together with an initial condition :math:`x_0`:
 
-The kinetic energy density is :math:`T(v) = \frac{1}{2} v^T \rho A v` with the mass density :math:`\rho` and the area of the cross-section in reference configuration :math:`A`.
-The inner potential energy assumes a compressible Neo-Hookean material model that is adapted to the string kinematics thus only the tangential stretch is considered. The determinant of the deformation gradient is therefore the stretch.
-The inner potential energy density is :math:`U_{int}(\nu) =  \frac{1}{2} C (\nu^2 - \text{ln}(\nu) - 1)` with the material constant :math:`C`. The external potential energy density only considers gravity in this code, :math:`U_{ext}(r) =  \rho A g r` with the gravitational acceleration vector :math:`g`.
-The Lagranian density is thus :math:`L(r, v, \nu) = T(v) - U_int(\nu) - U_ext(r)`.
+.. math::
 
-Discrete Model
+    \begin{aligned}
+        \dot{x} &= X(x) \\
+        x(0) &= x_0
+        \,.
+    \end{aligned}
+
+Here, :math:`x` is a function of time
+which takes values in the state space :math:`\mathcal{X} = \mathbb{R}^n`,
+for some :math:`n \in \mathbb{N}`.
+The right hand side :math:`X \colon \mathcal{X} \rightarrow \mathcal{X}`
+defines a vector field on :math:`\mathcal{X}`
+since for a flat state space :math:`T \mathcal{X} \cong \mathcal{X}`.
+
+
+Initial value problems are defined using the `IVP` container type:
+
+
+.. _hamiltonian_ivp:
+
+Initial value problems with Hamiltonian structure
 -------------------------------------------------
 
-The action
+The :ref:`symplectic methods <symplectic>` preserve
+the canonical Hamiltonian structure of initial value problems of the form
 
 .. math::
-    \int_t_{n}^t^{n+1} L(r, v, \nu) dt \approx \frac{\Delta t \Delta s}{4}(L_d(r_{n}^{k}, \frac{r_{n}^{k+1} - r_{n}^{k}}{\Delta t}, \frac{r_{n+1}^{k} - r_{n}^{k}}{\Delta s}) + L_d(r_{n+1}^{k}, \frac{r_{n}^{k+1} - r_{n}^{k}}{\Delta t}, \frac{r_{n+1}^{k} - r_{n}^{k}}{\Delta s}) + L_d(r_{n}^{k+1}, \frac{r_{n}^{k+1} - r_{n}^{k}}{\Delta t}, \frac{r_{n+1}^{k+1} - r_{n}^{k+1}}{\Delta s}) + L_d(r_{n+1}^{k+1}, \frac{r_{n+1}^{k+1} - r_{n+1}^{k}}{\Delta t}, \frac{r_{n+1}^{k+1} - r_{n}^{k+1}}{\Delta s}) )
-.. math::
 
-is approximated by the trapezoidal rule in space and time. The discrete variation of this discrete approximation of the action leads to the discrete Euler-Lagrange field equations for the geometrically exact string.
+    \begin{aligned}
+        \begin{bmatrix}
+            \dot{q} \\
+            \dot{p}
+        \end{bmatrix}
+        &=
+        \begin{bmatrix}
+            0 & 1 \\
+            -1 & 0
+        \end{bmatrix}
+        \,
+        \begin{bmatrix}
+            \frac{\partial H(q, p)}{\partial q} \\
+            \frac{\partial H(q, p)}{\partial p}
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            +\frac{\partial H(q, p)}{\partial q} \\
+            -\frac{\partial H(q, p)}{\partial p}
+        \end{bmatrix}
+        \\
+        \begin{bmatrix}
+            q(0) \\
+            p(0)
+        \end{bmatrix}
+        &=
+        \begin{bmatrix}
+            q_0 \\
+            p_0
+        \end{bmatrix}
+        \,.
+    \end{aligned}
+
+Here :math:`H \colon \mathcal{X} \rightarrow \mathbb{R}` is the Hamiltonian
+which yields the sum of the kinetic energy and the potential energy of the system.

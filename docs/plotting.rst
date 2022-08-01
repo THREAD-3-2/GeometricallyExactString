@@ -11,6 +11,11 @@ Trajectory
 
 .. autofunction:: GeometricallyExactString.plotTipTrajectory
 
+
+Phase portrait
+--------------
+
+
 Animation
 ---------
 

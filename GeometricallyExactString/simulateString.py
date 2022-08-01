@@ -6,7 +6,6 @@ import jax.numpy as jnp
 
 from scipy import optimize
 from tqdm import tqdm
-from geometricallyExactStringGES import GES
 
 # configurate JAX
 import jax
