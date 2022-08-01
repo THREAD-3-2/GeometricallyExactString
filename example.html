@@ -52,8 +52,8 @@ The dynamic simulation is then started and the results plotted.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">GeometricallyExactString</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">T</span> <span class="o">=</span> <span class="mf">2.</span>     <span class="c1"># simulation time</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nt</span> <span class="o">=</span> <span class="mi">500</span>   <span class="c1"># number of time steps</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">T</span> <span class="o">=</span> <span class="mf">10.</span>     <span class="c1"># simulation time</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nt</span> <span class="o">=</span> <span class="mi">2500</span>   <span class="c1"># number of time steps</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">T</span><span class="o">/</span><span class="n">nt</span>  <span class="c1"># time step width</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g_</span> <span class="o">=</span> <span class="mf">9.81</span>  <span class="c1"># graviational constant</span>
 
@@ -69,6 +69,9 @@ The dynamic simulation is then started and the results plotted.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">createAnimation</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">nt</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>This example results in the following plot and animation:</p>
+<img alt="_images/z_position_vs_time_t.png" src="_images/z_position_vs_time_t.png" />
+<img alt="_images/string.gif" src="_images/string.gif" />
 </section>
 </section>
 

@@ -51,15 +51,41 @@ The Lagranian density is thus <span class="math notranslate nohighlight">\(L(r, 
 <h2>Discrete Model<a class="headerlink" href="#discrete-model" title="Permalink to this heading">¶</a></h2>
 <p>The action</p>
 <div class="math notranslate nohighlight">
-\[\int_{t_{n}}^{t_{n+1}} L(r, v, \nu) dt \approx \frac{\Delta t \Delta s}{4}(L_d(r_{n}^{k}, \frac{r_{n}^{k+1} - r_{n}^{k}}{\Delta t}, \frac{r_{n+1}^{k} - r_{n}^{k}}{\Delta s}) + L_d(r_{n+1}^{k}, \frac{r_{n}^{k+1} - r_{n}^{k}}{\Delta t}, \frac{r_{n+1}^{k} - r_{n}^{k}}{\Delta s}) + L_d(r_{n}^{k+1}, \frac{r_{n}^{k+1} - r_{n}^{k}}{\Delta t}, \frac{r_{n+1}^{k+1} - r_{n}^{k+1}}{\Delta s}) + L_d(r_{n+1}^{k+1}, \frac{r_{n+1}^{k+1} - r_{n+1}^{k}}{\Delta t}, \frac{r_{n+1}^{k+1} - r_{n}^{k+1}}{\Delta s}) )\]</div>
+\[\begin{split}\begin{aligned}
+    &amp;\int_{t_{n}}^{t_{n+1}} L(r, v, \nu) dt \approx \frac{\Delta t \Delta s}{4}(&amp;&amp;L_d(r_{n}^{k}, \frac{r_{n}^{k+1} - r_{n}^{k}}{\Delta t}, \frac{r_{n+1}^{k} - r_{n}^{k}}{\Delta s}) \\
+    &amp; &amp;&amp;+ L_d(r_{n+1}^{k}, \frac{r_{n}^{k+1} - r_{n}^{k}}{\Delta t}, \frac{r_{n+1}^{k} - r_{n}^{k}}{\Delta s})
+    &amp; &amp;&amp;+ L_d(r_{n}^{k+1}, \frac{r_{n}^{k+1} - r_{n}^{k}}{\Delta t}, \frac{r_{n+1}^{k+1} - r_{n}^{k+1}}{\Delta s})
+    &amp; &amp;&amp;+ L_d(r_{n+1}^{k+1}, \frac{r_{n+1}^{k+1} - r_{n+1}^{k}}{\Delta t}, \frac{r_{n+1}^{k+1} - r_{n}^{k+1}}{\Delta s}) )
+\end{aligned}\end{split}\]</div>
 <div class="math notranslate nohighlight">
 \[\]</div>
 <p>is approximated by the trapezoidal rule in space and time. The discrete variation of this discrete approximation of the action leads to the discrete Euler-Lagrange field equations for the geometrically exact string.</p>
 </section>
 <section id="time-stepping">
 <h2>Time stepping<a class="headerlink" href="#time-stepping" title="Permalink to this heading">¶</a></h2>
-<p>The time stepping routine is
-.. autofunction:: GeometricallyExactString.plotTipTrajectory</p>
+<p>The time stepping routine is</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="GeometricallyExactString.simulate">
+<span class="sig-prename descclassname"><span class="pre">GeometricallyExactString.</span></span><span class="sig-name descname"><span class="pre">simulate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g_</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GeometricallyExactString.simulate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simulate the string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>string</strong> (<em>GES</em>) – geometrically exact string.</p></li>
+<li><p><strong>nt</strong> (<em>int</em>) – number of time steps.</p></li>
+<li><p><strong>dt</strong> (<em>float</em>) – time step size.</p></li>
+<li><p><strong>g</strong> (<em>float</em>) – gravitational acceleration.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>x</strong> – solution of the dynamic simulation</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>jnp.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 </section>
 
