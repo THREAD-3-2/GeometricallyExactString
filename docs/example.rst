@@ -27,8 +27,8 @@ The dynamic simulation is then started and the results plotted.
     >>> from GeometricallyExactString import *
     >>> import jax.numpy as jnp
 
-    >>> T = 1.     # simulation time
-    >>> nt = 500   # number of time steps
+    >>> T = 10.     # simulation time
+    >>> nt = 5000   # number of time steps
     >>> dt = T/nt  # time step width
     >>> g_ = 9.81  # graviational constant
 
