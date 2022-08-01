@@ -17,7 +17,7 @@
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Plotting" href="plotting.html" />
+    <link rel="next" title="Geometrically exact string model" href="geometricallyexactstring.html" />
     <link rel="prev" title="Installation" href="installation.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -52,8 +52,8 @@ The dynamic simulation is then started and the results plotted.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">GeometricallyExactString</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">T</span> <span class="o">=</span> <span class="mf">1.</span>     <span class="c1"># simulation time</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nt</span> <span class="o">=</span> <span class="mi">500</span>   <span class="c1"># number of time steps</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">T</span> <span class="o">=</span> <span class="mf">10.</span>     <span class="c1"># simulation time</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nt</span> <span class="o">=</span> <span class="mi">5000</span>   <span class="c1"># number of time steps</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">T</span><span class="o">/</span><span class="n">nt</span>  <span class="c1"># time step width</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g_</span> <span class="o">=</span> <span class="mf">9.81</span>  <span class="c1"># graviational constant</span>
 
@@ -96,8 +96,8 @@ The dynamic simulation is then started and the results plotted.</p>
 <li class="toctree-l2"><a class="reference internal" href="#simulation">Simulation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="geometricallyexactstring.html">Geometrically exact string model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="convergence.html">Convergence analysis</a></li>
 </ul>
 
 <div class="relations">
@@ -105,7 +105,7 @@ The dynamic simulation is then started and the results plotted.</p>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="installation.html" title="previous chapter">Installation</a></li>
-      <li>Next: <a href="plotting.html" title="next chapter">Plotting</a></li>
+      <li>Next: <a href="geometricallyexactstring.html" title="next chapter">Geometrically exact string model</a></li>
   </ul></li>
 </ul>
 </div>

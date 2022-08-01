@@ -12,8 +12,8 @@ Contents
 .. toctree::
    installation
    example
+   geometricallyexactstring
    plotting
-   convergence
    :maxdepth: 2
 
 

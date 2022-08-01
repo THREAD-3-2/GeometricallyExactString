@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Initial value problems &#8212; geometrically_exact_string 0.1 documentation</title>
+    <title>Geometrically exact string model &#8212; geometrically_exact_string 0.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -17,6 +17,8 @@
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Plotting" href="plotting.html" />
+    <link rel="prev" title="Example" href="example.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -33,67 +35,26 @@
 
           <div class="body" role="main">
             
-  <section id="initial-value-problems">
-<span id="ivp"></span><h1>Initial value problems<a class="headerlink" href="#initial-value-problems" title="Permalink to this heading">¶</a></h1>
-<section id="general-initial-value-problems">
-<span id="general-ivp"></span><h2>General initial value problems<a class="headerlink" href="#general-initial-value-problems" title="Permalink to this heading">¶</a></h2>
-<p>The considered initial value problems are stated as
-a system of first-order ordinary differential equations
-defined via a function <span class="math notranslate nohighlight">\(f\)</span>
-together with an initial condition <span class="math notranslate nohighlight">\(x_0\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{aligned}
-    \dot{x} &amp;= X(x) \\
-    x(0) &amp;= x_0
-    \,.
-\end{aligned}\end{split}\]</div>
-<p>Here, <span class="math notranslate nohighlight">\(x\)</span> is a function of time
-which takes values in the state space <span class="math notranslate nohighlight">\(\mathcal{X} = \mathbb{R}^n\)</span>,
-for some <span class="math notranslate nohighlight">\(n \in \mathbb{N}\)</span>.
-The right hand side <span class="math notranslate nohighlight">\(X \colon \mathcal{X} \rightarrow \mathcal{X}\)</span>
-defines a vector field on <span class="math notranslate nohighlight">\(\mathcal{X}\)</span>
-since for a flat state space <span class="math notranslate nohighlight">\(T \mathcal{X} \cong \mathcal{X}\)</span>.</p>
-<p>Initial value problems are defined using the <cite>IVP</cite> container type:</p>
+  <section id="geometrically-exact-string-model">
+<span id="geometricallyexactstring"></span><h1>Geometrically exact string model<a class="headerlink" href="#geometrically-exact-string-model" title="Permalink to this heading">¶</a></h1>
+<section id="continuous-model">
+<h2>Continuous model<a class="headerlink" href="#continuous-model" title="Permalink to this heading">¶</a></h2>
+<p>We consider the arc length of a stress-free reference configuration <span class="math notranslate nohighlight">\(s \in [0, L] \subseteq \mathbb{R}\)</span> and time <span class="math notranslate nohighlight">\(t \in [0, T] \subseteq \mathbb{R}\)</span>.
+The deformation of the string is then described by <span class="math notranslate nohighlight">\(r(s, t): [0, L] \times [0, T] \mapsto \mathbb{R}^3\)</span>. Its velocity is <span class="math notranslate nohighlight">\(v(s,t) = \frac{\partial r(s, t)}{\partial t}\)</span>.
+The stretch is defined as <span class="math notranslate nohighlight">\(\nu(s,t) = \left\Vert \frac{\partial r(s,t)}{\partial s} \right\Vert\)</span>.</p>
+<p>The kinetic energy density is <span class="math notranslate nohighlight">\(T(v) = \frac{1}{2} v^T \rho A v\)</span> with the mass density <span class="math notranslate nohighlight">\(\rho\)</span> and the area of the cross-section in reference configuration <span class="math notranslate nohighlight">\(A\)</span>.
+The inner potential energy assumes a compressible Neo-Hookean material model that is adapted to the string kinematics thus only the tangential stretch is considered. The determinant of the deformation gradient is therefore the stretch.
+The inner potential energy density is <span class="math notranslate nohighlight">\(U_{int}(\nu) =  \frac{1}{2} C (\nu^2 - \text{ln}(\nu) - 1)\)</span> with the material constant <span class="math notranslate nohighlight">\(C\)</span>. The external potential energy density only considers gravity in this code, <span class="math notranslate nohighlight">\(U_{ext}(r) =  \rho A g r\)</span> with the gravitational acceleration vector <span class="math notranslate nohighlight">\(g\)</span>.
+The Lagranian density is thus <span class="math notranslate nohighlight">\(L(r, v, \nu) = T(v) - U_int(\nu) - U_ext(r)\)</span>.</p>
 </section>
-<section id="initial-value-problems-with-hamiltonian-structure">
-<span id="hamiltonian-ivp"></span><h2>Initial value problems with Hamiltonian structure<a class="headerlink" href="#initial-value-problems-with-hamiltonian-structure" title="Permalink to this heading">¶</a></h2>
-<p>The <a class="reference internal" href="integrators.html#symplectic"><span class="std std-ref">symplectic methods</span></a> preserve
-the canonical Hamiltonian structure of initial value problems of the form</p>
+<section id="discrete-model">
+<h2>Discrete Model<a class="headerlink" href="#discrete-model" title="Permalink to this heading">¶</a></h2>
+<p>The action</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{aligned}
-    \begin{bmatrix}
-        \dot{q} \\
-        \dot{p}
-    \end{bmatrix}
-    &amp;=
-    \begin{bmatrix}
-        0 &amp; 1 \\
-        -1 &amp; 0
-    \end{bmatrix}
-    \,
-    \begin{bmatrix}
-        \frac{\partial H(q, p)}{\partial q} \\
-        \frac{\partial H(q, p)}{\partial p}
-    \end{bmatrix}
-    =
-    \begin{bmatrix}
-        +\frac{\partial H(q, p)}{\partial q} \\
-        -\frac{\partial H(q, p)}{\partial p}
-    \end{bmatrix}
-    \\
-    \begin{bmatrix}
-        q(0) \\
-        p(0)
-    \end{bmatrix}
-    &amp;=
-    \begin{bmatrix}
-        q_0 \\
-        p_0
-    \end{bmatrix}
-    \,.
-\end{aligned}\end{split}\]</div>
-<p>Here <span class="math notranslate nohighlight">\(H \colon \mathcal{X} \rightarrow \mathbb{R}\)</span> is the Hamiltonian
-which yields the sum of the kinetic energy and the potential energy of the system.</p>
+\[\int_t_{n}^t^{n+1} L(r, v, \nu) dt \approx \frac{\Delta t \Delta s}{4}(L_d(r_{n}^{k}, \frac{r_{n}^{k+1} - r_{n}^{k}}{\Delta t}, \frac{r_{n+1}^{k} - r_{n}^{k}}{\Delta s}) + L_d(r_{n+1}^{k}, \frac{r_{n}^{k+1} - r_{n}^{k}}{\Delta t}, \frac{r_{n+1}^{k} - r_{n}^{k}}{\Delta s}) + L_d(r_{n}^{k+1}, \frac{r_{n}^{k+1} - r_{n}^{k}}{\Delta t}, \frac{r_{n+1}^{k+1} - r_{n}^{k+1}}{\Delta s}) + L_d(r_{n+1}^{k+1}, \frac{r_{n+1}^{k+1} - r_{n+1}^{k}}{\Delta t}, \frac{r_{n+1}^{k+1} - r_{n}^{k+1}}{\Delta s}) )\]</div>
+<div class="math notranslate nohighlight">
+\[\]</div>
+<p>is approximated by the trapezoidal rule in space and time. The discrete variation of this discrete approximation of the action leads to the discrete Euler-Lagrange field equations for the geometrically exact string.</p>
 </section>
 </section>
 
@@ -114,17 +75,23 @@ which yields the sum of the kinetic energy and the potential energy of the syste
 
 
 <h3>Navigation</h3>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example.html">Example</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Geometrically exact string model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#continuous-model">Continuous model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#discrete-model">Discrete Model</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="convergence.html">Convergence analysis</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="example.html" title="previous chapter">Example</a></li>
+      <li>Next: <a href="plotting.html" title="next chapter">Plotting</a></li>
   </ul></li>
 </ul>
 </div>
