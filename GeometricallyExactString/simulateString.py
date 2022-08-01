@@ -5,10 +5,10 @@ Simulate the string
 """
 
 import jax.numpy as jnp
-from geometricallyExactStringGES import GES
 
 from scipy import optimize
 from tqdm import tqdm
+from geometricallyExactStringGES import GES
 
 # configurate JAX
 import jax

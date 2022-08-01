@@ -109,6 +109,7 @@ class GES(NamedTuple):
         # stretch as eucldiean norm of the derivative
         nu_norm = jnp.sqrt(nu_d[0]**2 + nu_d[1]**2 + nu_d[2]**2)
         return 0.5 * C * (nu_norm**2 - 2.*jnp.log(nu_norm) - 1.)
+        # return 0.5*C*(nu_norm-1)**2
 
     @jit
     def kineticEnergy(q_k, q_kp1, M, time_step):
@@ -420,6 +421,7 @@ class GES(NamedTuple):
                                                             + stress_p)
         del_eq = del_eq.at[1:jnp.shape(del_eq)[0], :].add(momenta_m
                                                           + momenta_p)
+
 
         return del_eq.flatten()
 

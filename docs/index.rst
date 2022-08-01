@@ -14,6 +14,7 @@ Contents
    example
    plotting
    convergence
+   geometricallyexactstring
    :maxdepth: 2
 
 

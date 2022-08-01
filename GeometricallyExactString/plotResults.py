@@ -18,7 +18,7 @@ jax.config.update('jax_enable_x64', True)
 
 __all__ = ['plotTipTrajectory', 'createAnimation']
 
-def plotTipTrajectroy(x, T, nt):
+def plotTipTrajectory(x, T, nt):
     """Plot the x-position of the tip of the string.
 
     Parameters
@@ -72,6 +72,7 @@ def createAnimation(x, string, T, nt):
                         1.1 * jnp.amax(x_an[:, 1, :])),
                   ylim=(1.1 * jnp.amin(x_an[:, 2, :]),
                         1.1 * jnp.amax(x_an[:, 2, :])))
+    # ax = plt.axes(xlim=(0, 1.1 * jnp.amax(x_an[:, 1, :])), ylim=(-0.1, 0.1))
     ax.set_aspect('equal')
     line, = ax.plot([], [], lw=3)
     plt.grid(color='0.9')
@@ -81,15 +82,15 @@ def createAnimation(x, string, T, nt):
         return line,
 
     def animate(i):
-        x_ani = x_an[:, 1, 25 * i]
-        y_ani = x_an[:, 2, 25 * i]
+        x_ani = x_an[:, 1, 5 * i]
+        y_ani = x_an[:, 2, 5 * i]
         line.set_data(x_ani, y_ani)
         return line,
 
     anim = animation.FuncAnimation(fig, animate,
                                    init_func=init,
-                                   frames=nt//25,
-                                   interval=(nt/25)/T,
+                                   frames=nt//5,
+                                   interval=(nt/5)/T,
                                    blit=False)
 
     anim.save('string.gif', writer='imagemagick')

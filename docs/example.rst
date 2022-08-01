@@ -10,14 +10,14 @@ This example shows how to simulate a geometrically exact string with fixed-free 
 Problem description
 ===================
 
-The string is fixed at one end and 
+The string is fixed at one end and free at the other end. It hangs down under gravity. 
 
 
 Simulation
 ==========
 
 First, the initial conditions are defined as a Python function. The relative position :math:`s\in\[0, L\]`
-defines the node location along the string. Here, the string is initially stretched by :math:`50\%` and has a linearly increasing velocity.
+defines the node location along the string. Here, the string is initially stretched by :math:`50\%` with linearly increasing velocity in y direction.
 Then, a string is initialized, with the desired length :math:`L`, number of discretization steps :math:`n_s`,
 mass density :math:`\rho` and material parameter :math:`E` as well as the area of the cross-section :math:`A`.
 The dynamic simulation is then started and the results plotted.
@@ -27,8 +27,8 @@ The dynamic simulation is then started and the results plotted.
     >>> from GeometricallyExactString import *
     >>> import jax.numpy as jnp
 
-    >>> T = 1.     # simulation time
-    >>> nt = 500   # number of time steps
+    >>> T = 10.     # simulation time
+    >>> nt = 5000   # number of time steps
     >>> dt = T/nt  # time step width
     >>> g_ = 9.81  # graviational constant
 
