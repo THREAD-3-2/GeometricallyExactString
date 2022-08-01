@@ -45,16 +45,21 @@ The stretch is defined as <span class="math notranslate nohighlight">\(\nu(s,t) 
 <p>The kinetic energy density is <span class="math notranslate nohighlight">\(T(v) = \frac{1}{2} v^T \rho A v\)</span> with the mass density <span class="math notranslate nohighlight">\(\rho\)</span> and the area of the cross-section in reference configuration <span class="math notranslate nohighlight">\(A\)</span>.
 The inner potential energy assumes a compressible Neo-Hookean material model that is adapted to the string kinematics thus only the tangential stretch is considered. The determinant of the deformation gradient is therefore the stretch.
 The inner potential energy density is <span class="math notranslate nohighlight">\(U_{int}(\nu) =  \frac{1}{2} C (\nu^2 - \text{ln}(\nu) - 1)\)</span> with the material constant <span class="math notranslate nohighlight">\(C\)</span>. The external potential energy density only considers gravity in this code, <span class="math notranslate nohighlight">\(U_{ext}(r) =  \rho A g r\)</span> with the gravitational acceleration vector <span class="math notranslate nohighlight">\(g\)</span>.
-The Lagranian density is thus <span class="math notranslate nohighlight">\(L(r, v, \nu) = T(v) - U_int(\nu) - U_ext(r)\)</span>.</p>
+The Lagranian density is thus <span class="math notranslate nohighlight">\(L(r, v, \nu) = T(v) - U_{int}(\nu) - U_{ext}(r)\)</span>. Only fixed-free boundary conditions in space are considered.</p>
 </section>
 <section id="discrete-model">
 <h2>Discrete Model<a class="headerlink" href="#discrete-model" title="Permalink to this heading">¶</a></h2>
 <p>The action</p>
 <div class="math notranslate nohighlight">
-\[\int_t_{n}^t^{n+1} L(r, v, \nu) dt \approx \frac{\Delta t \Delta s}{4}(L_d(r_{n}^{k}, \frac{r_{n}^{k+1} - r_{n}^{k}}{\Delta t}, \frac{r_{n+1}^{k} - r_{n}^{k}}{\Delta s}) + L_d(r_{n+1}^{k}, \frac{r_{n}^{k+1} - r_{n}^{k}}{\Delta t}, \frac{r_{n+1}^{k} - r_{n}^{k}}{\Delta s}) + L_d(r_{n}^{k+1}, \frac{r_{n}^{k+1} - r_{n}^{k}}{\Delta t}, \frac{r_{n+1}^{k+1} - r_{n}^{k+1}}{\Delta s}) + L_d(r_{n+1}^{k+1}, \frac{r_{n+1}^{k+1} - r_{n+1}^{k}}{\Delta t}, \frac{r_{n+1}^{k+1} - r_{n}^{k+1}}{\Delta s}) )\]</div>
+\[\int_{t_{n}}^{t_{n+1}} L(r, v, \nu) dt \approx \frac{\Delta t \Delta s}{4}(L_d(r_{n}^{k}, \frac{r_{n}^{k+1} - r_{n}^{k}}{\Delta t}, \frac{r_{n+1}^{k} - r_{n}^{k}}{\Delta s}) + L_d(r_{n+1}^{k}, \frac{r_{n}^{k+1} - r_{n}^{k}}{\Delta t}, \frac{r_{n+1}^{k} - r_{n}^{k}}{\Delta s}) + L_d(r_{n}^{k+1}, \frac{r_{n}^{k+1} - r_{n}^{k}}{\Delta t}, \frac{r_{n+1}^{k+1} - r_{n}^{k+1}}{\Delta s}) + L_d(r_{n+1}^{k+1}, \frac{r_{n+1}^{k+1} - r_{n+1}^{k}}{\Delta t}, \frac{r_{n+1}^{k+1} - r_{n}^{k+1}}{\Delta s}) )\]</div>
 <div class="math notranslate nohighlight">
 \[\]</div>
 <p>is approximated by the trapezoidal rule in space and time. The discrete variation of this discrete approximation of the action leads to the discrete Euler-Lagrange field equations for the geometrically exact string.</p>
+</section>
+<section id="time-stepping">
+<h2>Time stepping<a class="headerlink" href="#time-stepping" title="Permalink to this heading">¶</a></h2>
+<p>The time stepping routine is
+.. autofunction:: GeometricallyExactString.plotTipTrajectory</p>
 </section>
 </section>
 
@@ -81,6 +86,7 @@ The Lagranian density is thus <span class="math notranslate nohighlight">\(L(r, 
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Geometrically exact string model</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#continuous-model">Continuous model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#discrete-model">Discrete Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#time-stepping">Time stepping</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting</a></li>
