@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 Plot simualtion results
 """
@@ -18,6 +16,10 @@ jax.config.update('jax_enable_x64', True)
 
 __all__ = ['plotTipTrajectory', 'createAnimation']
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/main
 def plotTipTrajectory(x, T, nt):
     """Plot the x-position of the tip of the string.
 
