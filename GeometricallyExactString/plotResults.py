@@ -60,8 +60,7 @@ def createAnimation(x, string, T, nt):
 
     Returns
     -------
-    anim : d
-        Animation of the string.
+    None.
 
     """
     x_an = jnp.reshape(x, (string.nsteps+1, 3, nt))
