@@ -63,7 +63,7 @@ def createAnimation(x, string, T, nt):
     None.
 
     """
-    x_an = jnp.reshape(x, (string.nsteps+1, 3, nt))
+    x_an = jnp.reshape(x, (string.get('nsteps')+1, 3, nt))
     # create animation
     fig = plt.figure()
     ax = plt.axes(xlim=(1.1 * jnp.amin(x_an[:, 1, :]),
