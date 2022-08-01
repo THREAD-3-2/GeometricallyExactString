@@ -39,9 +39,9 @@ def plotTipTrajectory(x, T, nt):
     plt.plot(t, x[len(x)-1, :])
     plt.grid(color='0.9')
     plt.xlabel('time t')
-    plt.ylabel('x position of the tip of the string')
+    plt.ylabel('z position of the tip of the string')
     fig = plt.gcf()
-    fig.savefig('error energy density vs time t')
+    fig.savefig('z_position_vs_time_t')
 
 
 def createAnimation(x, string, T, nt):

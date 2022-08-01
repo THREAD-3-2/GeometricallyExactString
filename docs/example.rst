@@ -27,8 +27,8 @@ The dynamic simulation is then started and the results plotted.
     >>> from GeometricallyExactString import *
     >>> import jax.numpy as jnp
 
-    >>> T = 2.     # simulation time
-    >>> nt = 500   # number of time steps
+    >>> T = 10.     # simulation time
+    >>> nt = 2500   # number of time steps
     >>> dt = T/nt  # time step width
     >>> g_ = 9.81  # graviational constant
 
@@ -43,3 +43,8 @@ The dynamic simulation is then started and the results plotted.
     >>> plotTipTrajectory(x, T, nt)
     >>> createAnimation(x, string, T, nt)
 
+This example results in the following plot and animation:
+
+.. image:: z_position_vs_time_t.png
+
+.. image:: string.gif
