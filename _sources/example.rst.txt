@@ -10,7 +10,7 @@ This example shows how to simulate a geometrically exact string with fixed-free 
 Problem description
 ===================
 
-The string is fixed at one end and 
+The string is fixed at one end and free at the other. It hangs down under gravity and as an initial velocity to the right that increases over its length.
 
 
 Simulation
