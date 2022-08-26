@@ -40,15 +40,39 @@
 <p>This example shows how to simulate a geometrically exact string with fixed-free boundary conditions.</p>
 <section id="problem-description">
 <h2>Problem description<a class="headerlink" href="#problem-description" title="Permalink to this heading">¶</a></h2>
-<p>The string is fixed at one end and free at the other. It hangs down under gravity and as an initial velocity to the right that increases over its length.</p>
+<p>The string is fixed at one end and free at the other. It hangs down under gravity and has linearly increasing velocity over its length.</p>
 </section>
 <section id="simulation">
 <h2>Simulation<a class="headerlink" href="#simulation" title="Permalink to this heading">¶</a></h2>
 <p>First, the initial conditions are defined as a Python function. The relative position <span class="math notranslate nohighlight">\(s \in [0, L]\)</span>
 defines the node location along the string. Here, the string is initially stretched by <span class="math notranslate nohighlight">\(50 \%\)</span> and has a linearly increasing velocity.
 Then, a string is initialized, with the desired length <span class="math notranslate nohighlight">\(L\)</span>, number of discretization steps <span class="math notranslate nohighlight">\(n_s\)</span>,
-mass density <span class="math notranslate nohighlight">\(\rho\)</span> and material parameter <span class="math notranslate nohighlight">\(E\)</span> as well as the area of the cross-section <span class="math notranslate nohighlight">\(A\)</span>.
-The dynamic simulation is then started and the results plotted.</p>
+mass density <span class="math notranslate nohighlight">\(\rho\)</span> and material parameter <span class="math notranslate nohighlight">\(E\)</span> as well as the area of the cross-section <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="GeometricallyExactString.initString">
+<span class="sig-prename descclassname"><span class="pre">GeometricallyExactString.</span></span><span class="sig-name descname"><span class="pre">initString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nsteps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialConditions</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GeometricallyExactString.initString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a dictionary with parameters of gemetrically exact string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>L</strong> (<em>float</em>) – length of the string.</p></li>
+<li><p><strong>nsteps</strong> (<em>int</em>) – number of discretization steps in space.</p></li>
+<li><p><strong>rho</strong> (<em>jnp.ndarray</em>) – density.</p></li>
+<li><p><strong>E</strong> (<em>jnp.ndarray</em>) – material value for the compressible Neo-Hookean material.</p></li>
+<li><p><strong>A</strong> (<em>jnp.ndarray</em>) – area of the crosssection of the string.</p></li>
+<li><p><strong>initialConditions</strong> (<em>function</em>) – function defining the relative position of one node in space.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>GES</strong> – geometrically exact string.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>The dynamic simulation is then started and the results plotted.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">GeometricallyExactString</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 
@@ -71,6 +95,7 @@ The dynamic simulation is then started and the results plotted.</p>
 </div>
 <p>This example results in the following plot and animation:</p>
 <img alt="_images/z_position_vs_time_t.png" src="_images/z_position_vs_time_t.png" />
+<p>It may take a while to render the animation:</p>
 <img alt="_images/string.gif" src="_images/string.gif" />
 </section>
 </section>
