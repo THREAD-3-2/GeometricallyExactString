@@ -6,8 +6,8 @@
 Welcome to Geometrically exact string's documentation!
 ======================================================
 
-`GeometricallyExactString <https://github.com/THREAD-3-2/GeometricallyExactString>` is a Python code for a geometrically exact string with fixed-free boundary conditions.
-It uses `Jax <https://jax.readthedocs.io/en/latest/>` for automatic differentiation and just-in-time compilation capabilities.
+`GeometricallyExactString <https://github.com/THREAD-3-2/GeometricallyExactString>`_ is a Python code for a geometrically exact string with fixed-free boundary conditions.
+It uses `Jax <https://jax.readthedocs.io/en/latest/>`_ for automatic differentiation and just-in-time compilation capabilities.
 The method used is part of ongoing research. 
 
 Contents
