@@ -43,10 +43,103 @@
 The deformation of the string is then described by <span class="math notranslate nohighlight">\(r(s, t): [0, L] \times [0, T] \mapsto \mathbb{R}^3\)</span>. Its velocity is <span class="math notranslate nohighlight">\(v(s,t) = \frac{\partial r(s, t)}{\partial t}\)</span>.
 The stretch is defined as <span class="math notranslate nohighlight">\(\nu(s,t) = \left\Vert \frac{\partial r(s,t)}{\partial s} \right\Vert\)</span>.</p>
 <p>The kinetic energy density is <span class="math notranslate nohighlight">\(T(v) = \frac{1}{2} v^T \rho A v\)</span> with the mass density <span class="math notranslate nohighlight">\(\rho\)</span> and the area of the cross-section in reference configuration <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="GeometricallyExactString.geometricallyExactStringGES.kineticEnergy">
+<span class="sig-prename descclassname"><span class="pre">GeometricallyExactString.geometricallyExactStringGES.</span></span><span class="sig-name descname"><span class="pre">kineticEnergy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q_kp1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GeometricallyExactString.geometricallyExactStringGES.kineticEnergy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define the discrete kinetic eergy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>q_k</strong> (<em>jnp.ndarray</em>) – configuration at node k in time.</p></li>
+<li><p><strong>q_kp1</strong> (<em>jnp.ndarray</em>) – configuration at node k+1 in time.</p></li>
+<li><p><strong>M</strong> (<em>jnp.ndarray</em>) – mass density of the string.</p></li>
+<li><p><strong>time_step</strong> (<em>flaot</em>) – time step length.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>T</strong> – discrete kinetic energy.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>jnp.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
 <p>The inner potential energy assumes a compressible Neo-Hookean material model that is adapted to the string kinematics thus only the tangential stretch is considered. The determinant of the deformation gradient is therefore the stretch.
 The inner potential energy density is <span class="math notranslate nohighlight">\(U_{int}(\nu) =  \frac{1}{2} C (\nu^2 - \text{ln}(\nu) - 1)\)</span> with the material constant <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="GeometricallyExactString.geometricallyExactStringGES.internalPotentialEnergy">
+<span class="sig-prename descclassname"><span class="pre">GeometricallyExactString.geometricallyExactStringGES.</span></span><span class="sig-name descname"><span class="pre">internalPotentialEnergy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q_np1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GeometricallyExactString.geometricallyExactStringGES.internalPotentialEnergy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define the discrete internal potential energy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>q_n</strong> (<em>jnp.ndarray</em>) – configuration at node n in space.</p></li>
+<li><p><strong>q_np1</strong> (<em>float</em>) – cinfiguration at node n+1 in space.</p></li>
+<li><p><strong>C</strong> (<em>jnp.ndarray</em>) – stiffness of the string.</p></li>
+<li><p><strong>step</strong> (<em>float</em>) – step size in space.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>V_int</strong> – discrete internal potential energy.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>jnp.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
 <p>The external potential energy density only considers gravity in this code, <span class="math notranslate nohighlight">\(U_{ext}(r) =  \rho A g r\)</span> with the gravitational acceleration vector <span class="math notranslate nohighlight">\(g\)</span>.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="GeometricallyExactString.geometricallyExactStringGES.externalPotentialEnergy">
+<span class="sig-prename descclassname"><span class="pre">GeometricallyExactString.geometricallyExactStringGES.</span></span><span class="sig-name descname"><span class="pre">externalPotentialEnergy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g_</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GeometricallyExactString.geometricallyExactStringGES.externalPotentialEnergy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Discrete external potential energy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>q_n</strong> (<em>jnp.ndarray</em>) – discrete configuration at node n in space.</p></li>
+<li><p><strong>step</strong> (<em>float</em>) – step size in space.</p></li>
+<li><p><strong>M</strong> (<em>jnp.ndarray</em>) – mass density of the string.</p></li>
+<li><p><strong>g</strong> (<em>float</em>) – gravitaional acceleration.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>V_ext</strong> – discrete external potential energy.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>jnp.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
 <p>The Lagranian density is thus <span class="math notranslate nohighlight">\(L(r, v, \nu) = T(v) - U_{int}(\nu) - U_{ext}(r)\)</span>. Only fixed-free boundary conditions in space are considered.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="GeometricallyExactString.geometricallyExactStringGES.dynamicLagrangian">
+<span class="sig-prename descclassname"><span class="pre">GeometricallyExactString.geometricallyExactStringGES.</span></span><span class="sig-name descname"><span class="pre">dynamicLagrangian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q_n_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q_np1_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q_n_kp1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q_np1_kp1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GeometricallyExactString.geometricallyExactStringGES.dynamicLagrangian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the discrete Lagrangian of the string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>q_n_k</strong> (<em>jnp.ndarray</em>) – discrete configuration at node n in space and k in time.</p></li>
+<li><p><strong>q_np1_k</strong> (<em>jnp.ndarray</em>) – discrete configuration at node n+1 in space and k in time.</p></li>
+<li><p><strong>q_n_kp1</strong> (<em>jnp.ndarray</em>) – discrete configuration at node n in space and k+1 in time.</p></li>
+<li><p><strong>q_np1_kp1</strong> (<em>jnp.ndarray</em>) – discrete configuration at node n+1 in space and k+1 in time.</p></li>
+<li><p><strong>C</strong> (<em>jnp.ndarray</em>) – stiffness of crosssection.</p></li>
+<li><p><strong>M</strong> (<em>jnp.ndarray</em>) – mass density of string.</p></li>
+<li><p><strong>g</strong> (<em>float</em>) – graviational acceleration.</p></li>
+<li><p><strong>step</strong> (<em>float</em>) – step size in space.</p></li>
+<li><p><strong>time_step</strong> (<em>float</em>) – time step size.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>L</strong> – discrete Lagrangian.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>jnp.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="discrete-model">
 <h2>Discrete Model<a class="headerlink" href="#discrete-model" title="Permalink to this heading">¶</a></h2>
@@ -60,7 +153,34 @@ The inner potential energy density is <span class="math notranslate nohighlight"
 \end{aligned}\end{split}\]</div>
 <div class="math notranslate nohighlight">
 \[\]</div>
-<p>is approximated by the trapezoidal rule in space and time. Further explanations on this method, applied to the 1D wave equation can be found <cite>here &lt;https://thread-3-2.github.io/1D_wave_equation/discretisation.html&gt;</cite>. Mind, that the string under consideration has hyperelastic material and gravitation is also considered. The discrete variation of this discrete approximation of the action leads to the discrete Euler-Lagrange field equations for the geometrically exact string. The discrete variations are calculated in</p>
+<p>is approximated by the trapezoidal rule in space and time. Further explanations on this method, applied to the 1D wave equation can be found <a class="reference external" href="https://thread-3-2.github.io/1D_wave_equation/discretisation.html">here</a>. Mind, that the string under consideration has hyperelastic material and gravitation is also considered. The discrete variation of this discrete approximation of the action leads to the discrete Euler-Lagrange field equations for the geometrically exact string. The discrete variations are calculated in</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="GeometricallyExactString.geometricallyExactStringGES.D1dynamicLagrangian">
+<span class="sig-prename descclassname"><span class="pre">GeometricallyExactString.geometricallyExactStringGES.</span></span><span class="sig-name descname"><span class="pre">D1dynamicLagrangian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q_n_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q_np1_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q_n_kp1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q_np1_kp1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GeometricallyExactString.geometricallyExactStringGES.D1dynamicLagrangian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Differentiate the discrete Lagrangian w.r.t. the first argument.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>q_n_k</strong> (<em>jnp.ndarray</em>) – discrete configuration at node n in space and k in time.</p></li>
+<li><p><strong>q_np1_k</strong> (<em>jnp.ndarray</em>) – discrete configuration at node n+1 in space and k in time.</p></li>
+<li><p><strong>q_n_kp1</strong> (<em>jnp.ndarray</em>) – discrete configuration at node n in space and k+1 in time.</p></li>
+<li><p><strong>q_np1_kp1</strong> (<em>jnp.ndarray</em>) – discrete configuration at node n+1 in space and k+1 in time.</p></li>
+<li><p><strong>C</strong> (<em>jnp.ndarray</em>) – stiffness of crosssection.</p></li>
+<li><p><strong>M</strong> (<em>jnp.ndarray</em>) – mass density of string.</p></li>
+<li><p><strong>g</strong> (<em>float</em>) – graviational acceleration.</p></li>
+<li><p><strong>step</strong> (<em>float</em>) – step size in space.</p></li>
+<li><p><strong>time_step</strong> (<em>float</em>) – time step size.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>D_1L_d</strong> – Derivative of the discrete Lagrangian w.r.t the first argument.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>jnp.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
 <p>as well as in other functions for different nodes in space and time. The equations of the string with its hard coded boundary conditions are assembled in:</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="GeometricallyExactString.assembleSystem">
