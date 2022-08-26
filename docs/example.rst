@@ -10,7 +10,7 @@ This example shows how to simulate a geometrically exact string with fixed-free 
 Problem description
 ===================
 
-The string is fixed at one end and free at the other. It hangs down under gravity and as an initial velocity to the right that increases over its length.
+The string is fixed at one end and free at the other. It hangs down under gravity and has linearly increasing velocity over its length.
 
 
 Simulation
@@ -20,6 +20,9 @@ First, the initial conditions are defined as a Python function. The relative pos
 defines the node location along the string. Here, the string is initially stretched by :math:`50 \%` and has a linearly increasing velocity.
 Then, a string is initialized, with the desired length :math:`L`, number of discretization steps :math:`n_s`,
 mass density :math:`\rho` and material parameter :math:`E` as well as the area of the cross-section :math:`A`.
+
+.. autofunction:: GeometricallyExactString.initString
+
 The dynamic simulation is then started and the results plotted.
 
 .. doctest::
@@ -46,5 +49,7 @@ The dynamic simulation is then started and the results plotted.
 This example results in the following plot and animation:
 
 .. image:: z_position_vs_time_t.png
+
+It may take a while to render the animation:
 
 .. image:: string.gif

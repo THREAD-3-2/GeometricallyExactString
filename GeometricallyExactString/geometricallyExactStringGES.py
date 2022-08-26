@@ -356,8 +356,8 @@ def assembleSystem(x_kp1, x_k, x_km1, string, time_step, g_):
         vector of unknows at time step k.
     x_km1 : jnp.ndarray
         vector of unknows at time step k-1.
-    string : GES
-        Geometrically exact string.
+    string : dict
+        parameters geometrically exact string.
     time_step : float
         stime step size.
     g_ : float
@@ -434,8 +434,8 @@ def jacobianAssembleSystem(q_kp1, q_k, q_km1, string, time_step, g_):
         configuration at node k in time.
     q_km1 : jnp.ndarrray
         configuration at node k-1 in time.
-    string : GES
-        Geomtrically exact string.
+    string : dict
+        parameters geomtrically exact string.
     time_step : float
         time step size.
     g_ : float
@@ -463,8 +463,8 @@ def assembleSystem1(x_kp1, x_k, v_0, string, time_step, g_):
         vector of unknows at time step k.
     v_0 : jnp.ndarray
         vector of initial velocities.
-    string : GES
-        Geometrically exact string.
+    string : dict
+        parameters geometrically exact string.
     time_step : float
         stime step size.
     g_ : float
@@ -526,8 +526,8 @@ def jacobianAssembleSystem1(q_kp1, q_k, v_0, string, time_step, g_):
         configuration at node k in time.
     v_0 : jnp.ndarrray
         initial velocity.
-    string : GES
-        Geomtrically exact string.
+    string : dict
+        parameters geometrically exact string.
     time_step : float
         time step size.
     g_ : float
