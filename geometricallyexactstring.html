@@ -42,15 +42,11 @@
 <p>We consider the arc length of a stress-free reference configuration <span class="math notranslate nohighlight">\(s \in [0, L] \subseteq \mathbb{R}\)</span> and time <span class="math notranslate nohighlight">\(t \in [0, T] \subseteq \mathbb{R}\)</span>.
 The deformation of the string is then described by <span class="math notranslate nohighlight">\(r(s, t): [0, L] \times [0, T] \mapsto \mathbb{R}^3\)</span>. Its velocity is <span class="math notranslate nohighlight">\(v(s,t) = \frac{\partial r(s, t)}{\partial t}\)</span>.
 The stretch is defined as <span class="math notranslate nohighlight">\(\nu(s,t) = \left\Vert \frac{\partial r(s,t)}{\partial s} \right\Vert\)</span>.</p>
-<p>The kinetic energy density is <span class="math notranslate nohighlight">\(T(v) = \frac{1}{2} v^T \rho A v\)</span> with the mass density <span class="math notranslate nohighlight">\(\rho\)</span> and the area of the cross-section in reference configuration <span class="math notranslate nohighlight">\(A\)</span>.
-.. autofunction:: GeometricallyExactString.kineticEnergy</p>
+<p>The kinetic energy density is <span class="math notranslate nohighlight">\(T(v) = \frac{1}{2} v^T \rho A v\)</span> with the mass density <span class="math notranslate nohighlight">\(\rho\)</span> and the area of the cross-section in reference configuration <span class="math notranslate nohighlight">\(A\)</span>.</p>
 <p>The inner potential energy assumes a compressible Neo-Hookean material model that is adapted to the string kinematics thus only the tangential stretch is considered. The determinant of the deformation gradient is therefore the stretch.
-The inner potential energy density is <span class="math notranslate nohighlight">\(U_{int}(\nu) =  \frac{1}{2} C (\nu^2 - \text{ln}(\nu) - 1)\)</span> with the material constant <span class="math notranslate nohighlight">\(C\)</span>.
-.. autofunction:: GeometricallyExactString.internalPotentialEnergy</p>
-<p>The external potential energy density only considers gravity in this code, <span class="math notranslate nohighlight">\(U_{ext}(r) =  \rho A g r\)</span> with the gravitational acceleration vector <span class="math notranslate nohighlight">\(g\)</span>.
-.. autofunction:: GeometricallyExactString.externalPotentialEnergy</p>
-<p>The Lagranian density is thus <span class="math notranslate nohighlight">\(L(r, v, \nu) = T(v) - U_{int}(\nu) - U_{ext}(r)\)</span>. Only fixed-free boundary conditions in space are considered.
-.. autofunction:: GeometricallyExactString.dynamicLagrangian</p>
+The inner potential energy density is <span class="math notranslate nohighlight">\(U_{int}(\nu) =  \frac{1}{2} C (\nu^2 - \text{ln}(\nu) - 1)\)</span> with the material constant <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<p>The external potential energy density only considers gravity in this code, <span class="math notranslate nohighlight">\(U_{ext}(r) =  \rho A g r\)</span> with the gravitational acceleration vector <span class="math notranslate nohighlight">\(g\)</span>.</p>
+<p>The Lagranian density is thus <span class="math notranslate nohighlight">\(L(r, v, \nu) = T(v) - U_{int}(\nu) - U_{ext}(r)\)</span>. Only fixed-free boundary conditions in space are considered.</p>
 </section>
 <section id="discrete-model">
 <h2>Discrete Model<a class="headerlink" href="#discrete-model" title="Permalink to this heading">¶</a></h2>
@@ -64,12 +60,57 @@ The inner potential energy density is <span class="math notranslate nohighlight"
 \end{aligned}\end{split}\]</div>
 <div class="math notranslate nohighlight">
 \[\]</div>
-<p>is approximated by the trapezoidal rule in space and time. Further explanations on this method, applied to the 1D wave equation can be found <cite>here &lt;https://thread-3-2.github.io/1D_wave_equation/discretisation.html&gt;</cite>. Mind, that the string under consideration has hyperelastic material and gravitation is also considered. The discrete variation of this discrete approximation of the action leads to the discrete Euler-Lagrange field equations for the geometrically exact string. The discrete variations are calculated in
-.. autofunction:: GeometricallyExactString.D1dynamicLagrangian
-as well as in other functions for different nodes in space and time. The equations of the string with its hard coded boundary conditions are assembled in:
-.. autofunction:: GeometricallyExactString.assembleSystem</p>
-<p>The jacobian of those equations is required for the efficient solution of these equations. It is derived via automatic differentiation in:
-.. autofunction:: GeometricallyExactString.jacobianAssembleSystem</p>
+<p>is approximated by the trapezoidal rule in space and time. Further explanations on this method, applied to the 1D wave equation can be found <cite>here &lt;https://thread-3-2.github.io/1D_wave_equation/discretisation.html&gt;</cite>. Mind, that the string under consideration has hyperelastic material and gravitation is also considered. The discrete variation of this discrete approximation of the action leads to the discrete Euler-Lagrange field equations for the geometrically exact string. The discrete variations are calculated in</p>
+<p>as well as in other functions for different nodes in space and time. The equations of the string with its hard coded boundary conditions are assembled in:</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="GeometricallyExactString.assembleSystem">
+<span class="sig-prename descclassname"><span class="pre">GeometricallyExactString.</span></span><span class="sig-name descname"><span class="pre">assembleSystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_kp1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_km1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g_</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GeometricallyExactString.assembleSystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assemble the equations for the dynamic simulation of the GES.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_kp1</strong> (<em>jnp.ndarray</em>) – vector of unknows at time step k+1.</p></li>
+<li><p><strong>x_k</strong> (<em>jnp.ndarray</em>) – vector of unknows at time step k.</p></li>
+<li><p><strong>x_km1</strong> (<em>jnp.ndarray</em>) – vector of unknows at time step k-1.</p></li>
+<li><p><strong>string</strong> (<em>dict</em>) – parameters geometrically exact string.</p></li>
+<li><p><strong>time_step</strong> (<em>float</em>) – stime step size.</p></li>
+<li><p><strong>g</strong> (<em>float</em>) – graviational acceleration.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>del_eq</strong> – discrete Euler-Lagrange equations.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>jnp.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>The jacobian of those equations is required for the efficient solution of these equations. It is derived via automatic differentiation in:</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="GeometricallyExactString.jacobianAssembleSystem">
+<span class="sig-prename descclassname"><span class="pre">GeometricallyExactString.</span></span><span class="sig-name descname"><span class="pre">jacobianAssembleSystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q_kp1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q_km1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g_</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GeometricallyExactString.jacobianAssembleSystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the jacobian of the DEL w.r.t. the conifugration at k+1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>q_kp1</strong> (<em>jnp.ndarrray</em>) – configuration at node k+1 in time.</p></li>
+<li><p><strong>q_k</strong> (<em>jnp.ndarrray</em>) – configuration at node k in time.</p></li>
+<li><p><strong>q_km1</strong> (<em>jnp.ndarrray</em>) – configuration at node k-1 in time.</p></li>
+<li><p><strong>string</strong> (<em>dict</em>) – parameters geomtrically exact string.</p></li>
+<li><p><strong>time_step</strong> (<em>float</em>) – time step size.</p></li>
+<li><p><strong>g</strong> (<em>float</em>) – graviational acceleration.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>jacobian of the DEL.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>jnp.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
 <p>The latter two function also have versions for the first time step that use the Legendre transformation to apply consistent initial conditions for position and velocity.</p>
 </section>
 <section id="time-stepping">
