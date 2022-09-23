@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Geometrically Exact String Documentation
+Documentation of 'GeometricallyExactString' 
 ======================================================
 
 `GeometricallyExactString <https://github.com/THREAD-3-2/GeometricallyExactString>`_ is a Python code for a geometrically exact string with fixed-free boundary conditions.
