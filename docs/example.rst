@@ -27,7 +27,7 @@ The dynamic simulation is then started and the results plotted.
 
 .. doctest::
 
-    >>> from GeometricallyExactString import *
+    >>> from geometricallyexactstring import *
     >>> import jax.numpy as jnp
 
     >>> T = 10.     # simulation time
