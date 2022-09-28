@@ -44,28 +44,6 @@
 The deformation of the string is then described by <span class="math notranslate nohighlight">\(r(s, t): [0, L] \times [0, T] \mapsto \mathbb{R}^3\)</span>. Its velocity is <span class="math notranslate nohighlight">\(v(s,t) = \frac{\partial r(s, t)}{\partial t}\)</span>.
 The stretch is defined as <span class="math notranslate nohighlight">\(\nu(s,t) = \left\Vert \frac{\partial r(s,t)}{\partial s} \right\Vert\)</span>.</p>
 <p>The kinetic energy density is <span class="math notranslate nohighlight">\(T(v) = \frac{1}{2} v^T \rho A v\)</span> with the mass density <span class="math notranslate nohighlight">\(\rho\)</span> and the area of the cross-section in reference configuration <span class="math notranslate nohighlight">\(A\)</span>.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="GeometricallyExactString.geometricallyExactStringGES.kineticEnergy">
-<span class="sig-prename descclassname"><span class="pre">GeometricallyExactString.geometricallyExactStringGES.</span></span><span class="sig-name descname"><span class="pre">kineticEnergy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q_kp1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GeometricallyExactString.geometricallyExactStringGES.kineticEnergy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Define the discrete kinetic eergy.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>q_k</strong> (<em>jnp.ndarray</em>) – configuration at node k in time.</p></li>
-<li><p><strong>q_kp1</strong> (<em>jnp.ndarray</em>) – configuration at node k+1 in time.</p></li>
-<li><p><strong>M</strong> (<em>jnp.ndarray</em>) – mass density of the string.</p></li>
-<li><p><strong>time_step</strong> (<em>flaot</em>) – time step length.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>T</strong> – discrete kinetic energy.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>jnp.ndarray</p>
-</dd>
-</dl>
-</dd></dl>
-
 <p>The inner potential energy assumes a compressible Neo-Hookean material model that is adapted to the string kinematics thus only the tangential stretch is considered. The determinant of the deformation gradient is therefore the stretch.
 The inner potential energy density is <span class="math notranslate nohighlight">\(U_{int}(\nu) =  \frac{1}{2} C (\nu^2 - \text{ln}(\nu) - 1)\)</span> with the material constant <span class="math notranslate nohighlight">\(C\)</span>.</p>
 <dl class="py function">
