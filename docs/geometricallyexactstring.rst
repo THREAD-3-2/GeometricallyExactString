@@ -13,7 +13,7 @@ The stretch is defined as :math:`\nu(s,t) = \left\Vert \frac{\partial r(s,t)}{\p
 
 The kinetic energy density is :math:`T(v) = \frac{1}{2} v^T \rho A v` with the mass density :math:`\rho` and the area of the cross-section in reference configuration :math:`A`.
 
-.. autofunction:: geometricallyExactStringGES.kineticEnergy
+.. autofunction:: GeometricallyExactString.kineticEnergy
 
 The inner potential energy assumes a compressible Neo-Hookean material model that is adapted to the string kinematics thus only the tangential stretch is considered. The determinant of the deformation gradient is therefore the stretch.
 The inner potential energy density is :math:`U_{int}(\nu) =  \frac{1}{2} C (\nu^2 - \text{ln}(\nu) - 1)` with the material constant :math:`C`.
