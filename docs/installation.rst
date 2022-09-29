@@ -1,11 +1,10 @@
 .. _installation:
 
-==============
- Installation
-==============
+Installation
+============
 
 Virtual environment
-===================
+-------------------
 
 If you have a supported Python installation on your computer, you can
 install the package in a virtual environment like so:

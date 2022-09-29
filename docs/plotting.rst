@@ -1,8 +1,7 @@
 .. _plotting:
 
-==========
- Plotting
-==========
+Plotting
+========
 
 These functions are for visualizing simulation results.
 
