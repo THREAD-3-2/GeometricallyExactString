@@ -1,20 +1,19 @@
 .. _example:
 
-=========
- Example
-=========
+Example
+=======
 
 This example shows how to simulate a geometrically exact string with fixed-free boundary conditions.
 
 
 Problem description
-===================
+-------------------
 
 The string is fixed at one end and free at the other. It hangs down under gravity and has linearly increasing velocity over its length.
 
 
 Simulation
-==========
+----------
 
 First, the initial conditions are defined as a Python function. The relative position :math:`s \in [0, L]`
 defines the node location along the string. Here, the string is initially stretched by :math:`50 \%` and has a linearly increasing velocity.

@@ -1,11 +1,10 @@
 .. _geometricallyexactstring:
 
-========================
 Geometrically exact string model
-========================
+================================
 
 Continuous model
-------------------------------
+----------------
 
 We consider the arc length of a stress-free reference configuration :math:`s \in [0, L] \subseteq \mathbb{R}` and time :math:`t \in [0, T] \subseteq \mathbb{R}`.
 The deformation of the string is then described by :math:`r(s, t): [0, L] \times [0, T] \mapsto \mathbb{R}^3`. Its velocity is :math:`v(s,t) = \frac{\partial r(s, t)}{\partial t}`.
@@ -29,7 +28,7 @@ The Lagranian density is thus :math:`L(r, v, \nu) = T(v) - U_{int}(\nu) - U_{ext
 .. autofunction:: GeometricallyExactString.geometricallyExactStringGES.dynamicLagrangian
 
 Discrete Model
--------------------------------------------------
+--------------
 
 The action
 
@@ -57,7 +56,7 @@ The jacobian of those equations is required for the efficient solution of these 
 The latter two function also have versions for the first time step that use the Legendre transformation to apply consistent initial conditions for position and velocity.
 
 Time stepping
--------------------------------------------------
+-------------
 
 The time stepping routine is
 
